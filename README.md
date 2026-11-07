@@ -15,4 +15,4 @@ Set `VITE_CHALET_API_URL` in `.env` to the URL that returns the chalet JSON, the
 npm run dev
 ```
 
-The endpoint must allow browser requests from the frontend origin (CORS). If no URL is configured, the app requests `/api/chalet`.
+The endpoint must allow browser requests from the frontend origin (CORS). If no URL is configured, the app requests `/public`.
