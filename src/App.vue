@@ -11,6 +11,7 @@ const villageSeason = ref('winter')
 
 const copy = {
   fr: {
+    bedrooms: 'Chambres',
     navRooms: 'Les chambres',
     navExperience: 'Le châlet',
     navContact: 'Nous trouver',
@@ -37,6 +38,7 @@ const copy = {
     roomsTitle: 'Votre coin de montagne.',
     roomsIntro: 'Des chambres pensées pour ralentir, respirer et se sentir chez soi.',
     people: 'personnes',
+    forPeople: 'Pour',
     peopleUpTo: 'Jusqu’à',
     accessible: 'Accessible PMR',
     terrace: 'Terrasse',
@@ -91,6 +93,7 @@ const copy = {
     footer: 'Un châlet de montagne, au cœur des Aravis.',
   },
   en: {
+    bedrooms: 'Bedrooms',
     navRooms: 'The rooms',
     navExperience: 'The chalet',
     navContact: 'Find us',
@@ -117,6 +120,7 @@ const copy = {
     roomsTitle: 'Your own mountain escape.',
     roomsIntro: 'Thoughtful rooms made for slowing down, breathing deep and feeling at home.',
     people: 'guests',
+    forPeople: 'For',
     peopleUpTo: 'Up to',
     accessible: 'Wheelchair accessible',
     terrace: 'Terrace',
@@ -343,10 +347,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleGalleryKeys))
               {{ text.more }}
               <span aria-hidden="true">↘</span>
             </a>
-            <div class="hero-note">
-              <span class="note-stars" aria-hidden="true">✳</span>
-              <span>45°57′55.9″N &nbsp; 6°26′03.9″E</span>
-            </div>
           </div>
 
           <div class="hero-visual">
@@ -374,7 +374,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleGalleryKeys))
               @click="openGallery(chaletPhotos, 0, chalet.nom || 'Chalet le Gypaète')"
             >▧ {{ validPhotos(chaletPhotos).length }} {{ language === 'fr' ? 'photos' : 'photos' }}</button>
             <div class="photo-caption">
-              <span>01 — {{ text.navExperience }}</span>
+              <span>01 — {{ chalet.nom || 'Chalet le Gypaète' }}</span>
               <span>LES ARAVIS, FRANCE</span>
             </div>
             <div class="image-stamp" aria-hidden="true">
@@ -383,13 +383,12 @@ onUnmounted(() => window.removeEventListener('keydown', handleGalleryKeys))
               <span>MÈTRES</span>
             </div>
           </div>
-          <a class="scroll-hint" href="#chambres"><span></span>{{ text.navRooms }}</a>
         </section>
 
         <section class="intro-strip">
           <div class="intro-mark" aria-hidden="true">✳</div>
           <p>{{ text.footer }}</p>
-          <div class="strip-stat"><strong>{{ rooms.length.toString().padStart(2, '0') }}</strong><span>{{ text.navRooms }}</span></div>
+          <div class="strip-stat"><strong>{{ rooms.length }}</strong><span>{{ text.bedrooms }}</span></div>
           <div class="strip-stat"><strong>{{ chalet.nombrePersonnesBase || '—' }}</strong><span>{{ text.people }}</span></div>
         </section>
 
@@ -457,10 +456,15 @@ onUnmounted(() => window.removeEventListener('keydown', handleGalleryKeys))
                 <div class="room-title-row">
                   <div>
                     <h3>{{ room.nom }}</h3>
-                    <p class="room-capacity">{{ text.peopleUpTo }} {{ room.mombrePersonnesMax || room.mombrePersonnes || '—' }} {{ text.people }}</p>
+                    <p class="room-capacity">{{ text.peopleUpTo }} {{ room.nombrePersonnesMax || room.nombrePersonnes || '—' }} {{ text.people }}</p>
                   </div>
-                  <div v-if="room.cout != null" class="room-price">
-                    <strong>{{ formatPrice(room.cout) }}</strong><span>{{ text.perNight }}</span>
+                  <div v-if="room.cout != null || room.nombrePersonnes != null" class="room-price">
+                    <div v-if="room.cout != null" class="room-price-amount">
+                      <strong>{{ formatPrice(room.cout) }}</strong><span>{{ text.perNight }}</span>
+                    </div>
+                    <span v-if="room.nombrePersonnes != null" class="room-price-capacity">
+                      {{ text.forPeople }} {{ room.nombrePersonnes }} {{ text.people }}
+                    </span>
                   </div>
                 </div>
 

@@ -91,7 +91,8 @@ h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -1px; }
 .room-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
 .room-title-row h3 { margin: 0; font-family: var(--serif); font-size: 27px; font-weight: 400; }
 .room-capacity { margin: 7px 0 0; color: var(--muted); font-size: 9px; }
-.room-price { display: flex; align-items: baseline; gap: 5px; padding-top: 4px; white-space: nowrap; }
+.room-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; padding-top: 4px; white-space: nowrap; }
+.room-price-amount { display: flex; align-items: baseline; gap: 5px; }
 .room-price strong { font-family: var(--serif); font-size: 18px; font-weight: 400; }
 .room-price span { color: var(--muted); font-size: 9px; }
 .room-description { margin: 21px 0 16px; color: #6f726a; font-size: 11px; line-height: 1.75; }
